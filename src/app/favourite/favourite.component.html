@@ -1,0 +1,12 @@
+<div (click)='onStarClicked()'>
+  <!--[class.glyphicon-star-empty]="!isFavourite"-->
+  <!--[class.glyphicon-star]="isFavourite"></span>-->
+
+<span class="glyphicon" 
+  [ngClass]="{
+      'glyphicon-star': isFavourite,
+      'glyphicon-star-empty': !isFavourite
+  }" ></span>
+</div>
+<input type="text" [(ngModel)]="title"/>
+<div>{{title | titleCase}}</div>
