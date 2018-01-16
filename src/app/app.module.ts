@@ -7,6 +7,7 @@ import { CoursesComponent} from './courses.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { NgModule, ErrorHandler } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { CourseComponent } from './course/course.component';
@@ -22,6 +23,12 @@ import { PostsComponent } from './posts/posts.component';
 import { HttpModule } from '@angular/http';
 import { PostService } from './services/post.service';
 import { AppErrorHandler } from './common/app-errr-handler';
+import { FollowersComponent } from './followers/followers.component';
+import { FollowersService } from './services/followers.services';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { GithubProfileComponent } from './github-profile/github-profile.component';
+import { HomeComponent } from './home/home.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 @NgModule({
@@ -40,18 +47,31 @@ import { AppErrorHandler } from './common/app-errr-handler';
     ContactFormComponent,
     NewCourseFormComponent,
     ChangePasswordFormComponent,
-    PostsComponent
+    PostsComponent,
+    FollowersComponent,
+    NavBarComponent,
+    GithubProfileComponent,
+    HomeComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot([
+      {path: '', component: HomeComponent },
+      {path: 'followers/:id/:username', component: GithubProfileComponent },
+      {path: 'followers', component: FollowersComponent },
+      {path: 'posts', component: PostsComponent },
+      {path: '**', component: NotFoundComponent }
+    ])
   ],
   providers: [
     CoursesService, //Angular will only create one single instance of given object
     AuthorsService,
     PostService,
+    FollowersService,
     // tell Angular to use 'AppErrorHandler' wherever ErrorHandler is used
     { provide: ErrorHandler, useClass: AppErrorHandler}
   ],
